@@ -73,6 +73,7 @@ function App() {
       <div className="p-4" id="infoContainer">
         <h2 className="p-4 font-bold">Simple Ambisonics Loudspeaker Distribution Finder</h2>
         <div className="px-4">By Jakob Gille and Eagle Wu</div>
+        <a className="px-4 underline" href="https://github.com/mageeagle/ambisonics-ideal-speaker-layout-finder">Github Source</a>
         <div className="px-4">Always adjust the layouts after implementing them in your setup as there might be some that are not perfect.</div>
         <div className="px-4">Higher speaker density in front works for the time being mostly for horizontal layouts.</div>
         <div className="p-2">
