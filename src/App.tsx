@@ -113,7 +113,7 @@ function App() {
               downloadJSON(positions, isHorizontalOnly, isHighFrontDensity)
             }
           >
-            Download JSON
+            Download JSON for Decoder
           </button>
         </div>
         <table className="table-fixed w-full" id="speakerTable">
