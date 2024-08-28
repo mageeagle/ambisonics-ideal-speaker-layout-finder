@@ -1,4 +1,4 @@
-// There seem to be no logic to these ideal layouts?
+// Hard coded layouts at certain points
 const layouts = {
   5: [
     [0, 4],
@@ -19,7 +19,8 @@ const layouts = {
   ],
   9: [
     [0, 5],
-    [45, 4],
+    [45, 3],
+    [90, 1],
   ],
   10: [
     [0, 6],
@@ -233,15 +234,6 @@ function redistributeForHighFrontDensity(positions: number[][]) {
   );
 }
 
-// export function sphericalToCartesian(azimuth: number, elevation: number) {
-//   const theta = (azimuth * Math.PI) / 180;
-//   const phi = ((90 - elevation) * Math.PI) / 180;
-//   const x = Math.sin(phi) * Math.cos(theta);
-//   const y = Math.sin(phi) * Math.sin(theta);
-//   const z = Math.cos(phi);
-//   return [x, y, z];
-// }
-
 export function getColor(
   elevation: number,
   azimuth: number,
@@ -267,45 +259,6 @@ export function getColor(
 
   return colors[index];
 }
-
-// function calculateAndVisualize(numSpeakers: number) {
-// //   const numSpeakers = parseInt(document.getElementById("speakerCount").value);
-//   if (numSpeakers < 5) {
-//     alert("Please enter a number higher than 4.");
-//     return;
-//   }
-
-//   const positions = calculateSpeakerPositions(numSpeakers);
-//   visualizeSpeakers(positions);
-
-//   let output = `Distribution for ${numSpeakers} speakers:\n`;
-//   output += "\n";
-
-//   const elevationGroups = {};
-//   positions.forEach(([_, elevation]) => {
-//     elevationGroups[elevation] = (elevationGroups[elevation] || 0) + 1;
-//   });
-//   Object.entries(elevationGroups)
-//     .sort(([a], [b]) => a - b)
-//     .forEach(([elevation, count]) => {
-//       output += `${count} speakers at ${parseFloat(elevation).toFixed(
-//         2
-//       )}° elevation\n`;
-//     });
-
-//   document.getElementById("output").textContent = output;
-
-//   const tbody = document
-//     .getElementById("speakerTable")
-//     .getElementsByTagName("tbody")[0];
-//   tbody.innerHTML = "";
-//   positions.forEach(([azimuth, elevation], i) => {
-//     const row = tbody.insertRow();
-//     row.insertCell(0).textContent = i + 1;
-//     row.insertCell(1).textContent = azimuth.toFixed(2);
-//     row.insertCell(2).textContent = elevation.toFixed(2);
-//   });
-// }
 
 export function downloadJSON(
   positions: number[][],
