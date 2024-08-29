@@ -5,11 +5,13 @@ import { Center, Text3D } from "@react-three/drei";
 export default function SpeakerSource({
   index,
   speakerSize,
-  pos
+  pos,
+  color,
 }: {
   index: number;
   speakerSize: number;
-  pos: [x: number, y: number, z: number]
+  pos: [x: number, y: number, z: number];
+  color: string;
 }) {
 
   const size = useMemo(() => speakerSize / 1, [speakerSize]);
@@ -18,7 +20,7 @@ export default function SpeakerSource({
   return (
     <mesh frustumCulled={false} position={pos}>
       <boxGeometry args={[size, size, size]} />
-      <meshPhongMaterial transparent={true} opacity={0.5}/>
+      <meshPhongMaterial transparent={true} opacity={0.5} color={color}/>
       <Center>
         <Text3D size={size * 0.5} height={0.01} font={"HKGrotesk_Bold.json"}>
           <meshPhongMaterial depthWrite={false} />

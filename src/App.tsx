@@ -5,6 +5,7 @@ import {
   aed2xyz,
   calculateSpeakerPositions,
   downloadJSON,
+  getColor,
 } from "./functions";
 import SpeakerArray from "./SpeakerArray";
 const smallButton =
@@ -15,6 +16,7 @@ function App() {
   const [isHorizontalOnly, setIsHorizontalOnly] = useState(false);
   const [isHighFrontDensity, setIsHighFrontDensity] = useState(false);
   const [positions, setPositions] = useState<number[][]>([]);
+  const [colorArr, setColorArr] = useState<string[]>([]);
   const [speakerDisplay, setSpeakerDisplay] =
     useState<Array<React.JSX.Element>>();
   const [speakerXYZ, setSpeakerXYZ] =
@@ -34,10 +36,13 @@ function App() {
   useEffect(() => {
     if (!positions || !radius) return;
     const output: [x: number, y: number, z: number][] = [];
+    const color: string[] = [];
     positions.forEach(([a, e]) => {
       output.push(aed2xyz([a, e, radius]));
+      color.push(getColor(e, a, isHighFrontDensity));
     });
     setSpeakerXYZ(output);
+    setColorArr(color)
   }, [positions, radius]);
 
   useEffect(() => {
@@ -59,14 +64,15 @@ function App() {
   }, [speakerXYZ]);
 
   return (
-    <div className="grid grid-cols-2 h-screen w-screen bg-gray-800 text-white">
+    <div className="grid grid-cols-2 h-full w-screen bg-gray-600 text-white">
       <div id="canvas-container">
         <Canvas>
-          <directionalLight color="white" position={[1000, 1000, 1000]} />
+          <directionalLight color="white" position={[1, 1, 1]} />
           <CameraControls />
           <SpeakerArray
             speakerSize={radius * 0.1}
             pos={speakerXYZ}
+            color={colorArr}
           />
         </Canvas>
       </div>
@@ -76,6 +82,7 @@ function App() {
         <a className="px-4 underline" href="https://github.com/mageeagle/ambisonics-ideal-speaker-layout-finder">Github Source</a>
         <div className="px-4">Always check the layouts after implementing them in your setup as there might be some that are not perfect.</div>
         <div className="px-4">Higher speaker density in front works for the time being mostly for horizontal layouts.</div>
+        <div className="px-4">You can zoom and drag the visualisation to change the perspective.</div>
         <div className="p-2">
           <text className="p-2">Enter number of speakers:</text>
           <input
