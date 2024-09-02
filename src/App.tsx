@@ -24,6 +24,7 @@ function App() {
 
   useEffect(() => {
     if (!numSpeakers) return;
+    if (numSpeakers < 5) return;
     setPositions(
       calculateSpeakerPositions(
         numSpeakers,
@@ -65,7 +66,7 @@ function App() {
 
   return (
     <div className="grid grid-cols-2 h-full w-screen bg-gray-600 text-white">
-      <div id="canvas-container">
+      <div className="h-screen" id="canvas-container">
         <Canvas>
           <directionalLight color="white" position={[1, 1, 1]} />
           <CameraControls />
